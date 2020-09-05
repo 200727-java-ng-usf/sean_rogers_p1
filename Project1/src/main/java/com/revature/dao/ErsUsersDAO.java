@@ -13,6 +13,8 @@ public class ErsUsersDAO {
 
     public List<ErsUser> getAll() {
 
+        //DAOUtilities daoUtilities = new DAOUtilities();
+
         List<ErsUser> users = new ArrayList<>();
 
         try (Connection connection = DAOUtilities.getConnection();
