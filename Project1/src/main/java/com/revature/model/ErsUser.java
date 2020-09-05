@@ -1,6 +1,6 @@
 package com.revature.model;
 
-public class ErsUsers {
+public class ErsUser {
 
     private long id;
     private String username;

@@ -13,11 +13,11 @@ public class DAOUtilitiesTest {
 
 
 
-    @Test
+    /*@Test
     public void ensureThatAConnectionIsObtained() throws  SQLException{
         DAOUtilities daoUtilities = new DAOUtilities();
         Connection conn = DAOUtilities.getConnection();
         assertNotNull(conn);
-    }
+    }*/
 
 }

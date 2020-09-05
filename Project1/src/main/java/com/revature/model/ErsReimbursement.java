@@ -2,7 +2,7 @@ package com.revature.model;
 
 import java.sql.Timestamp;
 
-public class ErsReimbursements {
+public class ErsReimbursement {
 
     private long reimbId;
     private double amount;

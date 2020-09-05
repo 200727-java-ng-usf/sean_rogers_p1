@@ -1,6 +1,6 @@
 package com.revature.model;
 
-public class ErsReimbursementTypes {
+public class ErsReimbursementType {
 
     private long reimbTypeId;
     private String reimbType;

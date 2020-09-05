@@ -1,6 +1,6 @@
 package com.revature.model;
 
-public class ErsReimbursementStatuses {
+public class ErsReimbursementStatus {
 
     private long reimbStatusId;
     private String reimbStatus;
