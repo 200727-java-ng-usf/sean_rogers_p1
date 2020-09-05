@@ -1,7 +1,9 @@
 package com.revature.utilities;
 
-import java.io.FileReader;
-import java.io.IOException;
+import javax.servlet.Servlet;
+import javax.servlet.ServletContext;
+import java.io.*;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -9,19 +11,25 @@ import java.util.Properties;
 
 public class DAOUtilities {
 
+    //private static DAOUtilities daoUtilities = new DAOUtilities();
+
     private static Properties props = new Properties();
 
     public DAOUtilities() {
         super();
-
         try{
-            props.load(new FileReader("src/main/resources/application.properties"));
+            System.out.println();
+            props.load(new FileReader("C:\\Users\\Mr-Ro\\repos\\reva-repos\\batch-repos\\200727-jang-ng-usf\\sean_rogers_p1\\Project1\\src\\main\\resources\\application.properties"));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     /*public static DAOUtilities getInstance() {
+        if(daoUtilities == null) {
+            daoUtilities = new DAOUtilities();
+        }
         return daoUtilities;
     }*/
 
@@ -29,11 +37,25 @@ public class DAOUtilities {
         Connection connection = null;
 
         try {
-            Class.forName("org.postgresql.Driver");
+//
+//            ClassLoader loader = Thread.currentThread().getContextClassLoader();
+//            System.out.println("Loader: " + loader.toString());
+//            InputStream propsInput = loader.getResourceAsStream("application.properties");
+//            System.out.println("Props input: " + propsInput.toString());
+//            props.load(new FileReader("application.properties"));
+            //props.load(new FileReader("C:\\Users\\Mr-Ro\\repos\\reva-repos\\batch-repos\\200727-jang-ng-usf\\sean_rogers_p1\\Project1\\src\\main\\resources\\application.properties"));
+            //System.out.println("Line44: " + new File("C:\\Users\\Mr-Ro\\repos\\reva-repos\\batch-repos\\200727-jang-ng-usf\\sean_rogers_p1\\Project1\\src\\main\\resources\\application.properties").getPath());
 
-            connection = DriverManager.getConnection(props.getProperty("url"),
+            Class.forName("org.postgresql.Driver");
+            connection = DriverManager.getConnection("",
+                    "",
+                    "");
+            /*Class.forName("org.postgresql.Driver");
+            connection = DriverManager.getConnection(
+                    props.getProperty("url"),
                     props.getProperty("username"),
-                    props.getProperty("password"));
+                    props.getProperty("password")
+            );*/
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }

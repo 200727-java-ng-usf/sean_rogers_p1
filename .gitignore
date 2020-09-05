@@ -1,0 +1,12 @@
+# IDE-specific files and folders
+.idea/
+*.iml
+
+#Build folders and files
+target/
+out/
+*.class
+
+#Properties files
+*.properties
+src/main/java/com/revature/utilities/DBProperties.java
