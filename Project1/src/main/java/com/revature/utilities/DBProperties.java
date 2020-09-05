@@ -2,6 +2,6 @@ package com.revature.utilities;
 
 public class DBProperties {
 
-    //this should be ignored1
+    //this should be ignored2
 
 }
