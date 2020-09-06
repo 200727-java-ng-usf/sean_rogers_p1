@@ -5,31 +5,4 @@
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
 
-    <!-- FORWARDING MASTER SERVLET -->
-    <servlet>
-        <servlet-name>ForwardingMasterServlet</servlet-name>
-        <servlet-class>com.revature.servlets.ForwardingMasterServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ForwardingMasterServlet</servlet-name>
-        <!-- "*" is a wildcard -->
-        <url-pattern>*.pokemans</url-pattern>
-        <url-pattern>/api/*</url-pattern>
-
-        <!-- YES...you can have multiple url-pattern tags -->
-        <url-pattern>/MasterServlet</url-pattern>
-        <url-pattern>/trevin</url-pattern>
-    </servlet-mapping>
-
-
-
-    <!-- DIRECT RESPONDING MASTER SERVLET -->
-    <servlet>
-        <servlet-name>JsonMasterServlet</servlet-name>
-        <servlet-class>com.revature.servlets.JsonMasterServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>JsonMasterServlet</servlet-name>
-        <url-pattern>/json/*</url-pattern>
-    </servlet-mapping>
 </web-app>
