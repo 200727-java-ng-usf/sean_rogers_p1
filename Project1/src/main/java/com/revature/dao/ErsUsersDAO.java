@@ -28,6 +28,7 @@ public class ErsUsersDAO {
                 ErsUser user = new ErsUser();
 
                 // Each variable in our Book object maps to a column in a row from our results.
+                user.setId(rs.getInt("ers_user_id"));
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
                 user.setFirstName(rs.getString("first_name"));
@@ -47,6 +48,42 @@ public class ErsUsersDAO {
 
         // return the list of Book objects populated by the DB.
         return users;
+    }
+
+    public ErsUser getUserByUsernameAndPassword(String username, String password) {
+        ErsUser user = null;
+
+        try (Connection connection = DAOUtilities.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM ers_users where username = ? and password = ?");){
+
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+
+            ResultSet rs = pstmt.executeQuery();			// Queries the database
+
+            // So long as the ResultSet actually contains results...
+            while (rs.next()) {
+                // We need to populate a Book object with info for each row from our query result
+                user = new ErsUser();
+
+                // Each variable in our Book object maps to a column in a row from our results.
+                user.setUsername(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
+                user.setFirstName(rs.getString("first_name"));
+                user.setLastName((rs.getString("last_name")));
+                user.setEmail(rs.getString("email"));
+                user.setUserRoleId(rs.getInt("user_role_id"));
+
+            }
+
+            rs.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return user;
     }
 
 
