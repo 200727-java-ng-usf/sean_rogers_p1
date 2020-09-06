@@ -31,7 +31,7 @@
                 <label for="employee">Employee</label>
                 <input type="submit" />
     </form><br>
-    <form action="DeleteUserServlet" method="POST">
+    <form action="deleteuserservlet" method="POST">
         <label>Delete target user</label>
         <input type="text" name="username" placeholder="Delete User" />
         <input type="submit" />
