@@ -18,8 +18,9 @@ public class DAOUtilities {
     public DAOUtilities() {
         super();
         try{
-            System.out.println();
-            props.load(new FileReader("C:\\Users\\Mr-Ro\\repos\\reva-repos\\batch-repos\\200727-jang-ng-usf\\sean_rogers_p1\\Project1\\src\\main\\resources\\application.properties"));
+
+            //doesn't work
+            props.load(getClass().getClassLoader().getResourceAsStream("application.properties"));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -37,14 +38,6 @@ public class DAOUtilities {
         Connection connection = null;
 
         try {
-//
-//            ClassLoader loader = Thread.currentThread().getContextClassLoader();
-//            System.out.println("Loader: " + loader.toString());
-//            InputStream propsInput = loader.getResourceAsStream("application.properties");
-//            System.out.println("Props input: " + propsInput.toString());
-//            props.load(new FileReader("application.properties"));
-            //props.load(new FileReader("C:\\Users\\Mr-Ro\\repos\\reva-repos\\batch-repos\\200727-jang-ng-usf\\sean_rogers_p1\\Project1\\src\\main\\resources\\application.properties"));
-            //System.out.println("Line44: " + new File("C:\\Users\\Mr-Ro\\repos\\reva-repos\\batch-repos\\200727-jang-ng-usf\\sean_rogers_p1\\Project1\\src\\main\\resources\\application.properties").getPath());
 
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection("",

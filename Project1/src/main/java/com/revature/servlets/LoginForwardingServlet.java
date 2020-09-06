@@ -36,7 +36,7 @@ public class LoginForwardingServlet extends HttpServlet {
                 req.getRequestDispatcher("adminDashboardPage.jsp").forward(req, resp);
             }
             if(user.getUserRoleId() == 2) {
-                req.getRequestDispatcher("managerDashboardPage.jsp").forward(req, resp);
+                req.getRequestDispatcher("ManagerViews/managerDashboardPage.jsp").forward(req, resp);
             }
             if(user.getUserRoleId() == 3) {
                 req.getRequestDispatcher("employeeDashboardPage.jsp").forward(req, resp);
