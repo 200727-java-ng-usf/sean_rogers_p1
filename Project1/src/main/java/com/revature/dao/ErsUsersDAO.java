@@ -86,6 +86,105 @@ public class ErsUsersDAO {
         return user;
     }
 
+    /**
+     * Adds a new user to the database
+     * @param newUser to be added to the database
+     * @return true if successful, false if failed
+     */
+    public boolean save(ErsUser newUser) {
+
+        try(Connection connection = DAOUtilities.getConnection();) {
+
+            String sql = "INSERT INTO ers_users (username, \"password\", first_name, last_name, email, user_role_id) " +
+                    "values (?, ?, ?, ?, ?, ?)";
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+
+            pstmt.setString(1, newUser.getUsername());
+            pstmt.setString(2, newUser.getPassword());
+            pstmt.setString(3, newUser.getFirstName());
+            pstmt.setString(4, newUser.getLastName());
+            pstmt.setString(5, newUser.getEmail());
+            pstmt.setInt(6, newUser.getUserRoleId());
+
+            int rowsInserted = pstmt.executeUpdate();
+
+            if(rowsInserted != 0) {
+                return true;
+            }
+
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return false;
+    }
+
+    public boolean update(ErsUser user) {
+        try(Connection connection = DAOUtilities.getConnection();) {
+
+            ErsUser updatedUser = null;
+            String sql = "SELECT * FROM ers_users where username = ?";
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+
+            pstmt.setString(1, user.getUsername());
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while(rs.next()) {
+                updatedUser = new ErsUser();
+                updatedUser.setUsername(rs.getString("username"));
+                updatedUser.setPassword(rs.getString("password"));
+                updatedUser.setFirstName(rs.getString("first_name"));
+                updatedUser.setLastName(rs.getString("last_name"));
+                updatedUser.setEmail(rs.getString("email"));
+                updatedUser.setUserRoleId(rs.getInt("user_role_id"));
+            }
+
+            if(!user.getPassword().equals("")) {
+                updatedUser.setPassword(user.getPassword());
+            }
+            if(!user.getFirstName().equals("")) {
+                updatedUser.setFirstName(user.getFirstName());
+            }
+            if(!user.getLastName().equals("")) {
+                updatedUser.setLastName(user.getLastName());
+            }
+            if(!user.getEmail().equals("")) {
+                updatedUser.setEmail(user.getEmail());
+            }
+            if(user.getUserRoleId() != 0) {
+                updatedUser.setUserRoleId(user.getUserRoleId());
+            }
+
+
+            sql = "UPDATE ers_users set \"password\" = ?, first_name = ?, last_name = ?, email = ?, " +
+                    "user_role_id = ? " +
+                    "where username = ?";
+            pstmt = connection.prepareStatement(sql);
+
+
+            pstmt.setString(1, updatedUser.getPassword());
+            pstmt.setString(2, updatedUser.getFirstName());
+            pstmt.setString(3, updatedUser.getLastName());
+            pstmt.setString(4, updatedUser.getEmail());
+            pstmt.setInt(5, updatedUser.getUserRoleId());
+            pstmt.setString(6, updatedUser.getUsername());
+
+            int rowsInserted = pstmt.executeUpdate();
+
+            if(rowsInserted != 0) {
+                return true;
+            }
+
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return false;
+    }
+
 
     /*------------------------------------------------------------------------------------------------*/
 
