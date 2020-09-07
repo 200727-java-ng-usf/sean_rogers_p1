@@ -24,9 +24,14 @@ public class ViewAllReimbursementsServlet extends HttpServlet {
 
         PrintWriter out = resp.getWriter();
 
-        for(ErsReimbursement reimbursement : reimbursements) {
+        req.setAttribute("reimbursements", reimbursements);
+        req.setAttribute("size", reimbursements.size());
+
+        req.getRequestDispatcher("ManagerViews/reimbursementsView.jsp").forward(req, resp);
+
+        /*for(ErsReimbursement reimbursement : reimbursements) {
             out.write(reimbursement + "\n");
-        }
+        }*/
 
     }
 }
