@@ -1,4 +1,4 @@
-package com.revature.servlets;
+package com.revature.servlets.admin;
 
 import com.revature.dao.ErsUsersDAO;
 import com.revature.model.ErsUser;

@@ -29,14 +29,18 @@ public class LoginForwardingServlet extends HttpServlet {
             System.out.println("Username or password incorrect");
         } else {
             HttpSession session = req.getSession();
+            session.setAttribute("user", user);
+
+            //Why is this here?
             req.setAttribute("user", user);
 
             // if user is valid, forward to appropriate dashboard
             if(user.getUserRoleId() == 1) {
+
                 req.getRequestDispatcher("adminDashboardPage.jsp").forward(req, resp);
             }
             if(user.getUserRoleId() == 2) {
-                req.getRequestDispatcher("managerDashboardPage.jsp").forward(req, resp);
+                req.getRequestDispatcher("ManagerViews/managerDashboardPage.jsp").forward(req, resp);
             }
             if(user.getUserRoleId() == 3) {
                 req.getRequestDispatcher("employeeDashboardPage.jsp").forward(req, resp);
