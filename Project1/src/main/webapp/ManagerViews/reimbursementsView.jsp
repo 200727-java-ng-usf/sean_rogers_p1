@@ -34,6 +34,33 @@
     %>
 
     <br>
+    <br>
+    <form action="viewallreimbursementsbytype" method="GET">
+        <input type="radio" name="reimbursementType" value="1" />
+        <label for="lodging">Lodging</label><br>
+        <input type="radio" name="reimbursementType" value="2" />
+        <label for="travel">Travel</label><br>
+        <input type="radio" name="reimbursementType" value="3" />
+        <label for="food">Food</label><br>
+        <input type="radio" name="reimbursementType" value="4" />
+        <label for="other">Other</label><br>
+        <input type="submit" />
+    </form>
+    <br>
+    <form action="viewallreimbursementsbystatus" method="GET">
+        <input type="radio" name="reimbursementStatus" value="1" />
+        <label for="pending">Pending</label><br>
+        <input type="radio" name="reimbursementStatus" value="2" />
+        <label for="approved">Approved</label><br>
+        <input type="radio" name="reimbursementStatus" value="3" />
+        <label for="denied">Denied</label><br>
+        <input type="submit" />
+    </form>
+    <br>
+    <form action="viewallreimbursements" method="GET">
+        <label>View All Reimbursements<label>
+        <input type="submit" />
+    </form><br>
 
 
 
