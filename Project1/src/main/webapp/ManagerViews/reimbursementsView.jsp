@@ -16,12 +16,13 @@
 
             if(reimbursement.getReimbStatusId() == 1) { %>
                 <%=reimbursement%>
-                <form action="processreimbursement">
-                    <input type="radio" name="processOption" value="approve" />
-                    <label for="admin">Approve</label><br>
-                    <input type="radio" name="processOption" value="deny" />
-                    <label for="manager">Deny</label>
-                    <input type="hidden" name="reimbursementId" value=<c:out value="${reimbursement.getReimbId()}" /> />
+                <form action="processreimbursement" method="POST">
+                    <input type="radio" name="processOption" value="2" />
+                    <label for="Approve">Approve</label><br>
+                    <input type="radio" name="processOption" value="3" />
+                    <label for="Deny">Deny</label>
+                    <input type="hidden" name="reimbursementId" value=<%=reimbursement.getReimbId()%> />
+                    <input type="hidden" name="receipt" value=<%=reimbursement.getAmount()%> />
                     <input type="submit" />
                 </form>
                 <br><br>
@@ -31,6 +32,9 @@
             }
         }
     %>
+
+    <br>
+
 
 
 

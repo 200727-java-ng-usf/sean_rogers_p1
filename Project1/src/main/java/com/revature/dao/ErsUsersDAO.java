@@ -73,6 +73,7 @@ public class ErsUsersDAO {
                 user = new ErsUser();
 
                 // Each variable in our Book object maps to a column in a row from our results.
+                user.setId(rs.getInt("ers_user_id"));
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
                 user.setFirstName(rs.getString("first_name"));
