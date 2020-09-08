@@ -13,6 +13,8 @@ import java.io.IOException;
 @WebServlet("/addnewuser")
 public class AddNewUserServlet extends HttpServlet {
 
+    ErsUsersDAO ersUsersDAO = new ErsUsersDAO();
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
