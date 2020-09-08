@@ -304,4 +304,32 @@ public class ErsReimbursementsDAO {
         return reimbursements;
     }
 
+    public boolean save(ErsReimbursement ersReimbursement) {
+
+        try(Connection connection = DAOUtilities.getConnection()) {
+
+            String sql = "INSERT INTO ers_reimbursements (amount, submitted, description, author_id, reimb_status_id, reimb_type_id) " +
+                    "values (?, ?, ?, ?, ?, ?)";
+            pstmt = connection.prepareStatement(sql);
+
+            pstmt.setDouble(1, ersReimbursement.getAmount());
+            pstmt.setTimestamp(2, new Timestamp(Calendar.getInstance().getTime().getTime()));
+            pstmt.setString(3, ersReimbursement.getDescription());
+            pstmt.setLong(4, ersReimbursement.getAuthorId());
+            pstmt.setLong(5, ersReimbursement.getReimbStatusId());
+            pstmt.setLong(6, ersReimbursement.getReimbTypeId());
+
+            int rowsInserted = pstmt.executeUpdate();
+
+            if(rowsInserted != 0) {
+                return true;
+            }
+
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
 }
