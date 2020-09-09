@@ -43,7 +43,7 @@ public class DAOUtilities {
             connection = DriverManager.getConnection("",
                     "",
                     "");
-            /*/*Class.forName("org.postgresql.Driver");
+            /*Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(
                     props.getProperty("url"),
                     props.getProperty("username"),
