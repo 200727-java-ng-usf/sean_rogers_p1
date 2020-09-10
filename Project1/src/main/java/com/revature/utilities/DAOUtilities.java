@@ -15,16 +15,33 @@ public class DAOUtilities {
 
     private static Properties props = new Properties();
 
+    static{
+
+        try {
+            ClassLoader loader = Thread.currentThread().getContextClassLoader();
+            InputStream propsInput = loader.getResourceAsStream("application.properties");
+            props.load(propsInput);
+//            props.load(new FileReader("./src/main/resources/application.properties"));
+//            if(props.isEmpty()){
+//                props.load(new FileReader("./application.properties"));
+//            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Failed to load application properties.");
+//            e.printStackTrace();
+        }
+    }
+
     public DAOUtilities() {
         super();
-        try{
+        /*try{
 
             //doesn't work
             props.load(getClass().getClassLoader().getResourceAsStream("application.properties"));
 
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     /*public static DAOUtilities getInstance() {
@@ -39,16 +56,16 @@ public class DAOUtilities {
 
         try {
 
-            Class.forName("org.postgresql.Driver");
+            /*Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection("",
                     "",
-                    "");
-            /*Class.forName("org.postgresql.Driver");
+                    "");*/
+            Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(
                     props.getProperty("url"),
                     props.getProperty("username"),
                     props.getProperty("password")
-            );*/
+            );
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
