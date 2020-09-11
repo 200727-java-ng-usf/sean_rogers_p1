@@ -1,9 +1,6 @@
 package com.revature.utilities;
 
-import javax.servlet.Servlet;
-import javax.servlet.ServletContext;
 import java.io.*;
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -11,55 +8,33 @@ import java.util.Properties;
 
 public class DAOUtilities {
 
-    //private static DAOUtilities daoUtilities = new DAOUtilities();
-
     private static Properties props = new Properties();
 
     static{
 
         try {
+
             ClassLoader loader = Thread.currentThread().getContextClassLoader();
             InputStream propsInput = loader.getResourceAsStream("application.properties");
             props.load(propsInput);
-//            props.load(new FileReader("./src/main/resources/application.properties"));
-//            if(props.isEmpty()){
-//                props.load(new FileReader("./application.properties"));
-//            }
+
         } catch (IOException e) {
+
             e.printStackTrace();
             System.out.println("Failed to load application properties.");
-//            e.printStackTrace();
+
         }
     }
 
     public DAOUtilities() {
         super();
-        /*try{
-
-            //doesn't work
-            props.load(getClass().getClassLoader().getResourceAsStream("application.properties"));
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
     }
-
-    /*public static DAOUtilities getInstance() {
-        if(daoUtilities == null) {
-            daoUtilities = new DAOUtilities();
-        }
-        return daoUtilities;
-    }*/
 
     public static synchronized Connection getConnection() throws SQLException {
         Connection connection = null;
 
         try {
 
-            /*Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection("",
-                    "",
-                    "");*/
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(
                     props.getProperty("url"),

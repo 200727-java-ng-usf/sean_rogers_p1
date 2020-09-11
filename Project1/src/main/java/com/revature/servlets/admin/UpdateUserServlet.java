@@ -1,6 +1,7 @@
 package com.revature.servlets.admin;
 
 import com.revature.dao.ErsUsersDAO;
+import com.revature.exceptions.UsernameNotFoundException;
 import com.revature.model.ErsUser;
 
 import javax.servlet.ServletException;
@@ -10,13 +11,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Updates the user specified in request.parameter "username".
+ * Sets the ErsUser user properties to the request.parameter "password", "firstname", "lastname", "email", and "role".
+ * Passes user into ErsUsersDAO ersUsersDAO.getUserByUsername(user.getUsername) as the argument.
+ * If username is not in database, throw UsernameNotFoundException
+ *
+ * Validation checks for user input is done in the .jsp file
+ */
 @WebServlet("/updateuserservlet")
 public class UpdateUserServlet extends HttpServlet {
+
+    ErsUsersDAO ersUsersDAO = new ErsUsersDAO();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        ErsUsersDAO ersUsersDAO = new ErsUsersDAO();
+
 
         ErsUser user = new ErsUser();
 
@@ -31,12 +42,17 @@ public class UpdateUserServlet extends HttpServlet {
             user.setUserRoleId(Integer.parseInt(req.getParameter("role")));
         }
 
-        if(ersUsersDAO.update(user)){
-            resp.getWriter().write("Success!\n" + user + " saved to database!");
-        } else {
-            resp.getWriter().write("Failed");
+        if(ersUsersDAO.getUserByUsername(user.getUsername()) == null) {
+            throw new UsernameNotFoundException();
         }
+
+        ersUsersDAO.update(user);
 
 
     }
+
+    public void setDAO(ErsUsersDAO dao) {
+        ersUsersDAO = dao;
+    }
+
 }

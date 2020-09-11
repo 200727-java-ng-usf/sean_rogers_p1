@@ -1,6 +1,8 @@
 package com.revature.servlets.admin;
 
 import com.revature.dao.ErsUsersDAO;
+import com.revature.exceptions.EmailAlreadyTakenException;
+import com.revature.exceptions.UsernameAlreadyTakenException;
 import com.revature.model.ErsUser;
 
 import javax.servlet.ServletException;
@@ -18,9 +20,6 @@ public class AddNewUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        ErsUsersDAO ersUsersDAO = new ErsUsersDAO();
-
-
         ErsUser newUser = new ErsUser();
         newUser.setUsername(req.getParameter("username"));
         newUser.setPassword(req.getParameter("password"));
@@ -29,14 +28,20 @@ public class AddNewUserServlet extends HttpServlet {
         newUser.setEmail(req.getParameter("email"));
         newUser.setUserRoleId(Integer.parseInt(req.getParameter("role")));
 
-        if(ersUsersDAO.save(newUser)){
-            resp.getWriter().write("Success!\n" + newUser + " saved to database!");
-        } else {
-            resp.getWriter().write("Failed");
+        if(ersUsersDAO.getUserByUsername(newUser.getUsername()) != null){
+            throw new UsernameAlreadyTakenException();
         }
 
+        if(ersUsersDAO.getUserByEmail(newUser.getEmail()) != null){
+            throw new EmailAlreadyTakenException();
+        }
 
-        System.out.println("AddNewUserServlet line 27: " + newUser);
+        ersUsersDAO.save(newUser);
 
     }
+
+    public void setDAO(ErsUsersDAO dao) {
+        ersUsersDAO = dao;
+    }
+
 }
