@@ -13,6 +13,10 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+
+/**
+ * The manager processes the reimbursement that was submitted by an employee.
+ */
 @WebServlet("/processreimbursement")
 public class ProcessReimbursementServlet extends HttpServlet {
 
