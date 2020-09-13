@@ -1,26 +1,29 @@
 package com.revature.servlets.employee;
 
 import com.revature.dao.ErsReimbursementsDAO;
+import com.revature.model.ErsReimbursement;
 import com.revature.model.ErsUser;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 
-public class SubmitNewReimbursementServletTest {
+public class ViewAllReimbursementsByEmployeeServletTest {
 
     ErsReimbursementsDAO mockErsReimbursementsDAO = Mockito.mock(ErsReimbursementsDAO.class);
-    SubmitNewReimbursementServlet sut;
+    ViewAllReimbursementsByEmployeeServlet sut;
 
     @Before
     public void setup() {
-        sut = new SubmitNewReimbursementServlet();
+        sut = new ViewAllReimbursementsByEmployeeServlet();
         sut.setDAO(mockErsReimbursementsDAO);
     }
 
@@ -44,15 +47,18 @@ public class SubmitNewReimbursementServletTest {
         HttpServletRequest mockRequest = Mockito.mock(HttpServletRequest.class);
         HttpServletResponse mockResponse = Mockito.mock(HttpServletResponse.class);
         HttpSession session = Mockito.mock(HttpSession.class);
+        RequestDispatcher mockRequestDispatcher = Mockito.mock(RequestDispatcher.class);
 
         Mockito.when(mockRequest.getSession()).thenReturn(session);
         Mockito.when(session.getAttribute("user")).thenReturn(user);
+        Mockito.when(mockRequest.getParameter("reimbursementId")).thenReturn("3");
         Mockito.when(mockRequest.getParameter("amount")).thenReturn("23.13");
-        Mockito.when(mockRequest.getParameter("description")).thenReturn("description5");
+        Mockito.when(mockRequest.getParameter("description")).thenReturn("this is a description");
         Mockito.when(mockRequest.getParameter("reimbursementType")).thenReturn("2");
-        Mockito.when(mockErsReimbursementsDAO.save(Mockito.any())).thenReturn(true);
+        Mockito.when(mockErsReimbursementsDAO.getAllByAuthorId(user.getId())).thenReturn(new ArrayList<ErsReimbursement>());
+        Mockito.when(mockRequest.getRequestDispatcher(Mockito.anyString())).thenReturn(mockRequestDispatcher);
 
-        sut.doPost(mockRequest, mockResponse);
+        sut.doGet(mockRequest, mockResponse);
 
     }
 

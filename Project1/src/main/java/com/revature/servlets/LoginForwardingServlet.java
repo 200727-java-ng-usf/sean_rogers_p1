@@ -14,9 +14,11 @@ import java.io.IOException;
 @WebServlet("/LoginForwardingServlet")
 public class LoginForwardingServlet extends HttpServlet {
 
+    ErsUsersDAO ersUsersDAO = new ErsUsersDAO();
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ErsUsersDAO ersUsersDAO = new ErsUsersDAO();
+
 
         // get the user with matching credentials
         ErsUser user = ersUsersDAO.getUserByUsernameAndPassword(
@@ -48,4 +50,9 @@ public class LoginForwardingServlet extends HttpServlet {
 
         }
     }
+
+    public void setDAO(ErsUsersDAO dao) {
+        ersUsersDAO = dao;
+    }
+
 }
