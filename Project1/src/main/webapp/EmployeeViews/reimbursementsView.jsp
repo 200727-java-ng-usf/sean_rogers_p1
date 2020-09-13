@@ -4,7 +4,7 @@
 
 <jsp:include page="../header.jsp" />
 
-<body>
+
     <header>Reimbursements</header>
 
     <table class="table table-bordered table-dark-border-color">
@@ -61,6 +61,6 @@
         <%}%>
 
     </table>
-</body>
+
 
 <jsp:include page="../header.jsp" />

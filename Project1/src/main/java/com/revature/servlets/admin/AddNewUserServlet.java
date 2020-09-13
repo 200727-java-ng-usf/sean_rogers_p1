@@ -46,6 +46,9 @@ public class AddNewUserServlet extends HttpServlet {
         }
 
         ersUsersDAO.save(newUser);
+        req.setAttribute("newUser", newUser);
+        req.getRequestDispatcher("adminDashboardPage.jsp").forward(req, resp);
+
 
     }
 

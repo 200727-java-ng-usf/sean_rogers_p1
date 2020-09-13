@@ -1,4 +1,4 @@
-<body>
+<jsp:include page="../header.jsp" />
     <header>Welcome Manger: ${user.firstName}</header>
 
     <form action="viewallreimbursements" method="GET">
@@ -6,4 +6,4 @@
         <input type="submit" />
     </form><br>
 
-</body>
+<jsp:include page="../footer.jsp" />

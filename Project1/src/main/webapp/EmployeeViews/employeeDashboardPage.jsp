@@ -1,6 +1,6 @@
 <jsp:include page="../header.jsp" />
 
-<body>
+
     <div class="container">
         <header>Welcome Employee: ${user.firstName}</header>
     </div>
@@ -35,6 +35,6 @@
         </form><br>
     </div>
 
-</body>
+
 
 <jsp:include page="../footer.jsp" />

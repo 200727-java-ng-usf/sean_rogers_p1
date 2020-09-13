@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,6 +40,7 @@ public class AddNewUserServletTest {
         HttpServletRequest mockRequest = Mockito.mock(HttpServletRequest.class);
         HttpServletResponse mockResponse = Mockito.mock(HttpServletResponse.class);
         HttpSession session = Mockito.mock(HttpSession.class);
+        RequestDispatcher mockRequestDispatcher = Mockito.mock(RequestDispatcher.class);
 
         Mockito.when(mockRequest.getParameter("username")).thenReturn("seanrog1");
         Mockito.when(mockRequest.getParameter("password")).thenReturn("seanrog1password");
@@ -67,6 +69,8 @@ public class AddNewUserServletTest {
 
         Mockito.when(session.getAttribute("user")).thenReturn(adminUser);
         Mockito.when(mockRequest.getSession()).thenReturn(session);
+
+        Mockito.when(mockRequest.getRequestDispatcher(Mockito.anyString())).thenReturn(mockRequestDispatcher);
 
         Mockito.when(mockErsUsersDAO.getUserByUsername("seanrog1")).thenReturn(newUser);
 
@@ -157,6 +161,7 @@ public class AddNewUserServletTest {
         HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
         HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
         HttpSession session = Mockito.mock(HttpSession.class);
+        RequestDispatcher mockRequestDispatcher = Mockito.mock(RequestDispatcher.class);
 
         ErsUser newUser = new ErsUser();
         newUser.setId(999);
@@ -185,6 +190,7 @@ public class AddNewUserServletTest {
 
         Mockito.when(session.getAttribute("user")).thenReturn(adminUser);
         Mockito.when(request.getSession()).thenReturn(session);
+        Mockito.when(request.getRequestDispatcher(Mockito.anyString())).thenReturn(mockRequestDispatcher);
 
         sut.doPost(request, response);
 

@@ -1,6 +1,7 @@
 package com.revature.servlets;
 
 import com.revature.dao.ErsUsersDAO;
+import com.revature.exceptions.UsernamePasswordMismatchException;
 import com.revature.model.ErsUser;
 
 import javax.servlet.ServletException;
@@ -29,6 +30,7 @@ public class LoginForwardingServlet extends HttpServlet {
         // validate user
         if(user == null) {
             System.out.println("Username or password incorrect");
+            throw new UsernamePasswordMismatchException();
         } else {
             HttpSession session = req.getSession();
             session.setAttribute("user", user);

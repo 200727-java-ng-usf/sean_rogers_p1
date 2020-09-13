@@ -1,7 +1,20 @@
-<body>
-    <header>Welcome administrator: ${user.firstName}</header>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@page import="java.util.*"%>
+<%@page import="com.revature.model.ErsUser"%>
 
-    <form action="addnewuser" method="POST">
+<jsp:include page="./header.jsp" />
+    <header>Welcome administrator: ${user.firstName}</header>
+    <div class="container">
+        <%
+
+            ErsUser newUser = (ErsUser)request.getAttribute("newUser");
+
+            if(request.getAttribute("newUser") != null) {
+                %> <%=newUser.getUsername()%> has been added <%
+            }
+        %>
+    </div>
+    <form class="form-group" action="addnewuser" method="POST">
         <label>Add new user<label>
         <input type="text" name="username" placeholder="Username" required/>
         <input type="text" name="password" placeholder="password" required/>
@@ -13,10 +26,10 @@
         <input type="radio" name="role" value="2" required/>
         <label for="manager">Manager</label>
         <input type="radio" name="role" value="3" required/>
-        <label for="employee">Employee</label>
+        <label for="employee">Employee</label><br>
         <input type="submit" />
-    </form><br>
-    <form action="updateuserservlet" method="POST">
+    </form><br><hr>
+    <form class="form-group" action="updateuserservlet" method="POST">
         <label>Update target user</label>
         <input type="text" name="username" placeholder="Username" required/>
                 <input type="text" name="password" placeholder="password" />
@@ -28,13 +41,12 @@
                 <input type="radio" name="role" value="2" />
                 <label for="manager">Manager</label>
                 <input type="radio" name="role" value="3" />
-                <label for="employee">Employee</label>
+                <label for="employee">Employee</label><br>
                 <input type="submit" />
-    </form><br>
-    <form action="deleteuserservlet" method="POST">
+    </form><br><hr>
+    <form class="form-group" action="deleteuserservlet" method="POST">
         <label>Delete target user</label>
         <input type="text" name="username" placeholder="Delete User" />
-        <input type="submit" />
+        <input type="submit" /><br>
     </form>
-
-</body>
+    <jsp:include page="./footer.jsp" />
