@@ -36,6 +36,10 @@ public class SubmitNewReimbursementServlet extends HttpServlet {
         } else {
             resp.getWriter().write("Error saving reimbursement to database");
         }
-
     }
+
+    public void setDAO(ErsReimbursementsDAO dao) {
+        ersReimbursementsDAO = dao;
+    }
+
 }
