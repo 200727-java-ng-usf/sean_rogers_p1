@@ -1,6 +1,7 @@
 package com.revature.servlets.manager;
 
 import com.revature.dao.ErsReimbursementsDAO;
+import com.revature.exceptions.NotAuthorizedException;
 import com.revature.model.ErsReimbursement;
 import com.revature.model.ErsUser;
 
@@ -16,6 +17,8 @@ import java.util.List;
 @WebServlet("/viewallreimbursementsbystatus")
 public class ViewAllReimbursementsByStatusServlet extends HttpServlet {
 
+    ErsReimbursementsDAO ersReimbursementsDAO = new ErsReimbursementsDAO();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -24,9 +27,8 @@ public class ViewAllReimbursementsByStatusServlet extends HttpServlet {
         if(user.getUserRoleId() != 2) {
             resp.setStatus(403);
             resp.sendError(403);
+            throw new NotAuthorizedException();
         }
-
-        ErsReimbursementsDAO ersReimbursementsDAO = new ErsReimbursementsDAO();
 
         List<ErsReimbursement> reimbursements = ersReimbursementsDAO
                 .getAllByStatus(Integer.parseInt(req.getParameter("reimbursementStatus")));
@@ -36,4 +38,9 @@ public class ViewAllReimbursementsByStatusServlet extends HttpServlet {
 
         req.getRequestDispatcher("ManagerViews/reimbursementsView.jsp").forward(req, resp);
     }
+
+    public void setDAO(ErsReimbursementsDAO dao) {
+        ersReimbursementsDAO = dao;
+    }
+
 }

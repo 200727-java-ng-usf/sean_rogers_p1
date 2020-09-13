@@ -1,6 +1,7 @@
 package com.revature.servlets.manager;
 
 import com.revature.dao.ErsReimbursementsDAO;
+import com.revature.exceptions.NotAuthorizedException;
 import com.revature.model.ErsReimbursement;
 import com.revature.model.ErsUser;
 
@@ -20,6 +21,8 @@ import java.util.List;
 @WebServlet("/processreimbursement")
 public class ProcessReimbursementServlet extends HttpServlet {
 
+    ErsReimbursementsDAO ersReimbursementsDAO = new ErsReimbursementsDAO();
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -28,10 +31,9 @@ public class ProcessReimbursementServlet extends HttpServlet {
         if(user.getUserRoleId() != 2) {
 
             resp.setStatus(403);
+            throw new NotAuthorizedException();
 
         } else {
-
-            ErsReimbursementsDAO ersReimbursementsDAO = new ErsReimbursementsDAO();
 
             double receipt = 0.0;
 
@@ -53,4 +55,9 @@ public class ProcessReimbursementServlet extends HttpServlet {
         }
 
     }
+
+    public void setDAO(ErsReimbursementsDAO dao) {
+        ersReimbursementsDAO = dao;
+    }
+
 }
