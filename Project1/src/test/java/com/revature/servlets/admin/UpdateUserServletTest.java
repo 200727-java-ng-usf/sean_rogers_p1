@@ -4,8 +4,6 @@ import com.revature.dao.ErsUsersDAO;
 import com.revature.exceptions.NotAuthorizedException;
 import com.revature.exceptions.UsernameNotFoundException;
 import com.revature.model.ErsUser;
-import com.sun.deploy.net.HttpRequest;
-import com.sun.deploy.net.HttpResponse;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
