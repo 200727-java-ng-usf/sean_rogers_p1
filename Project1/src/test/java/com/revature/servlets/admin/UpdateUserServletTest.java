@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,6 +37,7 @@ public class UpdateUserServletTest {
 
         HttpServletRequest mockRequest = Mockito.mock(HttpServletRequest.class);
         HttpServletResponse mockResponse = Mockito.mock(HttpServletResponse.class);
+        RequestDispatcher mockRequestDispatcher = Mockito.mock(RequestDispatcher.class);
         HttpSession session = Mockito.mock(HttpSession.class);
 
         Mockito.when(mockRequest.getParameter("username")).thenReturn("seanrog-1");
@@ -56,6 +58,7 @@ public class UpdateUserServletTest {
 
         Mockito.when(mockRequest.getSession()).thenReturn(session);
         Mockito.when(session.getAttribute("user")).thenReturn(adminUser);
+        Mockito.when(mockRequest.getRequestDispatcher(Mockito.anyString())).thenReturn(mockRequestDispatcher);
         Mockito.when(mockErsUsersDAO.getUserByUsername("seanrog-1")).thenReturn(null);
 
         sut.doPost(mockRequest,mockResponse);
@@ -68,6 +71,7 @@ public class UpdateUserServletTest {
 
         HttpServletRequest mockRequest = Mockito.mock(HttpServletRequest.class);
         HttpServletResponse mockResponse = Mockito.mock(HttpServletResponse.class);
+        RequestDispatcher mockRequestDispatcher = Mockito.mock(RequestDispatcher.class);
         HttpSession session = Mockito.mock(HttpSession.class);
 
         Mockito.when(mockRequest.getParameter("username")).thenReturn("seanrog1");
@@ -97,6 +101,7 @@ public class UpdateUserServletTest {
 
         Mockito.when(mockRequest.getSession()).thenReturn(session);
         Mockito.when(session.getAttribute("user")).thenReturn(adminUser);
+        Mockito.when(mockRequest.getRequestDispatcher(Mockito.anyString())).thenReturn(mockRequestDispatcher);
         Mockito.when(mockErsUsersDAO.getUserByUsername("seanrog1")).thenReturn(user);
 
         sut.doPost(mockRequest,mockResponse);
@@ -105,10 +110,6 @@ public class UpdateUserServletTest {
 
     @Test (expected = NotAuthorizedException.class)
     public void updateExistingUserAsAnUnauthorizedUser() throws ServletException, IOException {
-
-        HttpServletRequest mockRequest = Mockito.mock(HttpServletRequest.class);
-        HttpServletResponse mockResponse = Mockito.mock(HttpServletResponse.class);
-        HttpSession session = Mockito.mock(HttpSession.class);
 
         ErsUser targetUser = new ErsUser();
         targetUser.setId(5);
@@ -128,7 +129,13 @@ public class UpdateUserServletTest {
         adminUser.setEmail("seanmikerog3@gmail.com");
         adminUser.setUserRoleId(2);
 
+        HttpServletRequest mockRequest = Mockito.mock(HttpServletRequest.class);
+        HttpServletResponse mockResponse = Mockito.mock(HttpServletResponse.class);
+        RequestDispatcher mockRequestDispatcher = Mockito.mock(RequestDispatcher.class);
+        HttpSession session = Mockito.mock(HttpSession.class);
+
         Mockito.when(mockRequest.getSession()).thenReturn(session);
+        Mockito.when(mockRequest.getRequestDispatcher(Mockito.anyString())).thenReturn(mockRequestDispatcher);
         Mockito.when(session.getAttribute("user")).thenReturn(adminUser);
 
         sut.doPost(mockRequest,mockResponse);

@@ -55,8 +55,11 @@
     </table>
 
     <br>
+    <hr>
     <br>
+
     <form class="form-group" action="viewallreimbursementsbytype" method="GET">
+        <label>View All reimbursements by type</label><br>
         <input type="radio" name="reimbursementType" value="1" />
         <label for="lodging">Lodging</label><br>
         <input type="radio" name="reimbursementType" value="2" />
@@ -68,7 +71,10 @@
         <input type="submit" />
     </form>
     <br>
+    <hr>
+    <br>
     <form class="form-group" action="viewallreimbursementsbystatus" method="GET">
+        <label>View All reimbursements by status</label><br>
         <input type="radio" name="reimbursementStatus" value="1" />
         <label for="pending">Pending</label><br>
         <input type="radio" name="reimbursementStatus" value="2" />
@@ -83,4 +89,4 @@
         <input type="submit" />
     </form><br>
 
-<jsp:include page="../header.jsp" />
+<jsp:include page="../footer.jsp" />

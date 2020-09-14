@@ -20,10 +20,10 @@
 
             if(reimbursement.getReimbStatusId() == 1) { %>
                 <form action="updatereimbursement" method="POST">
-                    <td><input type="text" name="amount" placeholder="Amount" size="10" value=<%=reimbursement.getAmount()%> /></td>
+                    <td><input type="text" name="amount" placeholder="Amount" size="10" value=<%=reimbursement.getAmount()%> required /></td>
                     <td><%=reimbursement.getSubmitted()%> </td>
                     <td>Unresolved</td>
-                    <td><input type="text" name="description" placeholder="description" value=<%=reimbursement.getDescription()%> /></td>
+                    <td><input type="text" name="description" placeholder="description" value=<%=reimbursement.getDescription()%> required /></td>
                     <td>No Receipt</td>
                     <td>No Resolver</td>
                     <td>Pending</td>

@@ -9,8 +9,8 @@
             <nav class="navbar navbar-expand-lg bg-dark">
                 <a class="navbar-brand" href="#">Project1</a>
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="/project1/login">Login</a> 
-                    <a class="nav-item nav-link" href="/project1/logout">Logout</a>
+                    <a class="nav-item nav-link" href="/login">Login</a>
+                    <a class="nav-item nav-link" href="/logout">Logout</a>
                 </div>
             </nav>
         </div>

@@ -45,16 +45,18 @@ public class UpdateUserServlet extends HttpServlet {
         userToUpdate.setEmail(req.getParameter("email"));
 
         if(req.getParameter("role") == null || req.getParameter("role").equals("")) {
-            user.setUserRoleId(0);
+            userToUpdate.setUserRoleId(0);
         } else {
-            user.setUserRoleId(Integer.parseInt(req.getParameter("role")));
+            userToUpdate.setUserRoleId(Integer.parseInt(req.getParameter("role")));
         }
 
-        if(ersUsersDAO.getUserByUsername(user.getUsername()) == null) {
+        if(ersUsersDAO.getUserByUsername(userToUpdate.getUsername()) == null) {
             throw new UsernameNotFoundException();
         }
 
-        ersUsersDAO.update(user);
+        ersUsersDAO.update(userToUpdate);
+        req.setAttribute("message", userToUpdate.getUsername() + " has been updated");
+        req.getRequestDispatcher("adminDashboardPage.jsp").forward(req, resp);
 
 
     }

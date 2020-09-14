@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,6 +37,7 @@ public class DeleteUserServletTest {
     public void deleteUserThatDoesntExist() throws ServletException, IOException {
         HttpServletRequest mockRequest = Mockito.mock(HttpServletRequest.class);
         HttpServletResponse mockResponse = Mockito.mock(HttpServletResponse.class);
+        RequestDispatcher mockRequestDispatcher = Mockito.mock(RequestDispatcher.class);
         HttpSession session = Mockito.mock(HttpSession.class);
 
         Mockito.when(mockRequest.getParameter("username")).thenReturn("seanrog-1");
@@ -57,6 +59,7 @@ public class DeleteUserServletTest {
         Mockito.when(session.getAttribute("user")).thenReturn(adminUser);
         Mockito.when(mockRequest.getSession()).thenReturn(session);
 
+        Mockito.when(mockRequest.getRequestDispatcher(Mockito.anyString())).thenReturn(mockRequestDispatcher);
         Mockito.when(mockErsUsersDAO.getUserByUsername("seanrog-1")).thenReturn(null);
 
         sut.doPost(mockRequest, mockResponse);
@@ -67,6 +70,7 @@ public class DeleteUserServletTest {
     public void deleteExistingUser() throws ServletException, IOException {
         HttpServletRequest mockRequest = Mockito.mock(HttpServletRequest.class);
         HttpServletResponse mockResponse = Mockito.mock(HttpServletResponse.class);
+        RequestDispatcher mockRequestDispatcher = Mockito.mock(RequestDispatcher.class);
         HttpSession session = Mockito.mock(HttpSession.class);
 
         Mockito.when(mockRequest.getParameter("username")).thenReturn("seanrog1");
@@ -99,6 +103,7 @@ public class DeleteUserServletTest {
         targetUser.setUserRoleId(1);
 
         Mockito.when(mockErsUsersDAO.getUserByUsername("seanrog1")).thenReturn(targetUser);
+        Mockito.when(mockRequest.getRequestDispatcher(Mockito.anyString())).thenReturn(mockRequestDispatcher);
 
         sut.doPost(mockRequest, mockResponse);
 
@@ -108,6 +113,7 @@ public class DeleteUserServletTest {
     public void deleteExistingUserAsAnUnauthorizedUser() throws ServletException, IOException {
         HttpServletRequest mockRequest = Mockito.mock(HttpServletRequest.class);
         HttpServletResponse mockResponse = Mockito.mock(HttpServletResponse.class);
+        RequestDispatcher mockRequestDispatcher = Mockito.mock(RequestDispatcher.class);
         HttpSession session = Mockito.mock(HttpSession.class);
 
         Mockito.when(mockRequest.getParameter("username")).thenReturn("seanrog1");
@@ -140,6 +146,7 @@ public class DeleteUserServletTest {
         targetUser.setUserRoleId(1);
 
         Mockito.when(mockErsUsersDAO.getUserByUsername("seanrog1")).thenReturn(targetUser);
+        Mockito.when(mockRequest.getRequestDispatcher(Mockito.anyString())).thenReturn(mockRequestDispatcher);
 
         sut.doPost(mockRequest, mockResponse);
 

@@ -50,7 +50,7 @@ public class ProcessReimbursementServlet extends HttpServlet {
                 resp.setStatus(500);
             }
 
-            resp.sendRedirect("/project1/viewallreimbursements");
+            resp.sendRedirect("/viewallreimbursements");
 
         }
 

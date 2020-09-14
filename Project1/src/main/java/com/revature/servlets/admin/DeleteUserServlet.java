@@ -35,6 +35,8 @@ public class DeleteUserServlet extends HttpServlet {
         }
 
         ersUsersDAO.delete(usernameOfUserToDelete);
+        req.setAttribute("message", usernameOfUserToDelete + " has been deleted");
+        req.getRequestDispatcher("adminDashboardPage.jsp").forward(req, resp);
 
     }
 

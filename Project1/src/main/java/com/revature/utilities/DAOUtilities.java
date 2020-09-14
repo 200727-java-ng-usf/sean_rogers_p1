@@ -47,12 +47,24 @@ public class DAOUtilities {
 
         if (connection == null) {
             try {
+                connection = DriverManager.getConnection(
+                        System.getenv("url"),
+                        System.getenv("username"),
+                        System.getenv("password"));
+            } catch (SQLException e) {
+                System.out.println("Could not register driver!");
+                e.printStackTrace();
+            }
+        }
+
+        /*if (connection == null) {
+            try {
                 Class.forName("org.postgresql.Driver");
             } catch (ClassNotFoundException e) {
                 System.out.println("Could not register driver!");
                 e.printStackTrace();
             }
-        }
+        }*/
 
         //If connection was closed then retrieve a new connection
         if (connection.isClosed()){
