@@ -32,10 +32,14 @@ public class SubmitNewReimbursementServlet extends HttpServlet {
 
         if(ersReimbursementsDAO.save(reimbursement)) {
             resp.setStatus(201);
-            resp.sendRedirect("/project1/viewallreimbursementsbyemployee");
+            resp.sendRedirect("/viewallreimbursementsbyemployee");
         } else {
             resp.getWriter().write("Error saving reimbursement to database");
         }
-
     }
+
+    public void setDAO(ErsReimbursementsDAO dao) {
+        ersReimbursementsDAO = dao;
+    }
+
 }

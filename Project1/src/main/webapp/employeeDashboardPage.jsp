@@ -1,3 +1,3 @@
-<body>
+<jsp:include page="./header.jsp" />
 Welcome employee: ${user.firstName}
-</body>
+<jsp:include page="./footer.jsp" />

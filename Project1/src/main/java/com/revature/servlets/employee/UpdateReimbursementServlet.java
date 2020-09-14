@@ -32,7 +32,7 @@ public class UpdateReimbursementServlet extends HttpServlet {
 
         if(ersReimbursementsDAO.update(reimbursement)) {
             resp.setStatus(201);
-            resp.sendRedirect("/project1/viewallreimbursementsbyemployee");
+            resp.sendRedirect("/viewallreimbursementsbyemployee");
         } else {
             resp.getWriter().write("Failed to update reimbursement");
         }
