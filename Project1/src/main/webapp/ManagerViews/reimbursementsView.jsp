@@ -27,9 +27,9 @@
                 <td> <%=reimbursement.getReimbStatusId()%> </td>
                 <td> <%=reimbursement.getReimbTypeId()%> </td>
                 <td><form action="processreimbursement" method="POST">
-                    <input type="radio" name="processOption" value="2" />
+                    <input type="radio" name="processOption" value="2" required />
                     <label for="Approve">Approve</label><br>
-                    <input type="radio" name="processOption" value="3" />
+                    <input type="radio" name="processOption" value="3" required />
                     <label for="Deny">Deny</label><br>
                     <input type="hidden" name="reimbursementId" value=<%=reimbursement.getReimbId()%> />
                     <input type="hidden" name="receipt" value=<%=reimbursement.getAmount()%> />
@@ -60,13 +60,13 @@
 
     <form class="form-group" action="viewallreimbursementsbytype" method="GET">
         <label>View All reimbursements by type</label><br>
-        <input type="radio" name="reimbursementType" value="1" />
+        <input type="radio" name="reimbursementType" value="1" required />
         <label for="lodging">Lodging</label><br>
-        <input type="radio" name="reimbursementType" value="2" />
+        <input type="radio" name="reimbursementType" value="2" required />
         <label for="travel">Travel</label><br>
-        <input type="radio" name="reimbursementType" value="3" />
+        <input type="radio" name="reimbursementType" value="3" required />
         <label for="food">Food</label><br>
-        <input type="radio" name="reimbursementType" value="4" />
+        <input type="radio" name="reimbursementType" value="4" required />
         <label for="other">Other</label><br>
         <input type="submit" />
     </form>
@@ -75,11 +75,11 @@
     <br>
     <form class="form-group" action="viewallreimbursementsbystatus" method="GET">
         <label>View All reimbursements by status</label><br>
-        <input type="radio" name="reimbursementStatus" value="1" />
+        <input type="radio" name="reimbursementStatus" value="1" required />
         <label for="pending">Pending</label><br>
-        <input type="radio" name="reimbursementStatus" value="2" />
+        <input type="radio" name="reimbursementStatus" value="2" required />
         <label for="approved">Approved</label><br>
-        <input type="radio" name="reimbursementStatus" value="3" />
+        <input type="radio" name="reimbursementStatus" value="3" required />
         <label for="denied">Denied</label><br>
         <input type="submit" />
     </form>
