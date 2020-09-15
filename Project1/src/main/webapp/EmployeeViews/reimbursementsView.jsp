@@ -23,7 +23,7 @@
                     <td><input type="text" name="amount" placeholder="Amount" size="10" value=<%=reimbursement.getAmount()%> required /></td>
                     <td><%=reimbursement.getSubmitted()%> </td>
                     <td>Unresolved</td>
-                    <td><input type="text" name="description" placeholder="description" value=<%=reimbursement.getDescription()%> required /></td>
+                    <td><input type="text" name="description" placeholder="description" value="<%=reimbursement.getDescription()%>" required /></td>
                     <td>No Receipt</td>
                     <td>No Resolver</td>
                     <td>Pending</td>
@@ -63,4 +63,4 @@
     </table>
 
 
-<jsp:include page="../header.jsp" />
+<jsp:include page="../footer.jsp" />

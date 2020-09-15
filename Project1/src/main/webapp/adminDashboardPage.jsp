@@ -42,16 +42,16 @@
         <input type="text" name="lastName" placeholder="Last Name" /><br>
         <input type="text" name="email" placeholder="Email" /><br>
         <input type="radio" name="role" value="1" />
-        <label for="admin">Admin</label>
+        <label for="admin">Admin</label><br>
         <input type="radio" name="role" value="2" />
-        <label for="manager">Manager</label>
+        <label for="manager">Manager</label><br>
         <input type="radio" name="role" value="3" />
         <label for="employee">Employee</label><br>
         <input type="submit" />
     </form><br><hr><br>
     <form class="form-group" action="deleteuserservlet" method="POST">
         <label>Delete target user</label><br>
-        <input type="text" name="username" placeholder="Delete User" /><br>
+        <input type="text" name="username" placeholder="Delete User" required /><br>
         <input type="submit" /><br>
     </form>
     <jsp:include page="./footer.jsp" />

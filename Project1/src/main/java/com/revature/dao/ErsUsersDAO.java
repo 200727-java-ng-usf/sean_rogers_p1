@@ -20,7 +20,7 @@ public class ErsUsersDAO {
         try (Connection connection = DAOUtilities.getConnection();){
 
 
-            pstmt = connection.prepareStatement("SELECT * FROM ers_users");
+            pstmt = connection.prepareStatement("SELECT * FROM ers_users where is_active = true");
 
             ResultSet rs = pstmt.executeQuery();			// Queries the database
 
@@ -60,7 +60,7 @@ public class ErsUsersDAO {
         try (Connection connection = DAOUtilities.getConnection();){
 
 
-            pstmt = connection.prepareStatement("SELECT * FROM ers_users where username = ?");
+            pstmt = connection.prepareStatement("SELECT * FROM ers_users where username = ? and is_active = true");
 
             pstmt.setString(1, username);
 
@@ -100,7 +100,7 @@ public class ErsUsersDAO {
         try (Connection connection = DAOUtilities.getConnection();){
 
 
-            pstmt = connection.prepareStatement("SELECT * FROM ers_users where email = ?");
+            pstmt = connection.prepareStatement("SELECT * FROM ers_users where email = ? and is_active = true");
 
             pstmt.setString(1, email);
 
@@ -140,7 +140,7 @@ public class ErsUsersDAO {
         try (Connection connection = DAOUtilities.getConnection();){
 
 
-            pstmt = connection.prepareStatement("SELECT * FROM ers_users where username = ? and password = ?");
+            pstmt = connection.prepareStatement("SELECT * FROM ers_users where username = ? and password = ? and is_active = true");
 
             pstmt.setString(1, username);
             pstmt.setString(2, password);
@@ -215,7 +215,7 @@ public class ErsUsersDAO {
         try(Connection connection = DAOUtilities.getConnection();) {
 
             ErsUser updatedUser = null;
-            String sql = "SELECT * FROM ers_users where username = ?";
+            String sql = "SELECT * FROM ers_users where username = ? and is_active = true";
             pstmt = connection.prepareStatement(sql);
 
             pstmt.setString(1, user.getUsername());
@@ -251,7 +251,7 @@ public class ErsUsersDAO {
 
             sql = "UPDATE ers_users set \"password\" = ?, first_name = ?, last_name = ?, email = ?, " +
                     "user_role_id = ? " +
-                    "where username = ?";
+                    "where username = ? and is_active = true";
             pstmt = connection.prepareStatement(sql);
 
 
@@ -282,7 +282,7 @@ public class ErsUsersDAO {
     public boolean delete(String username) {
         try(Connection connection = DAOUtilities.getConnection();) {
 
-            String sql = "DELETE FROM ers_users WHERE username = ?";
+            String sql = "UPDATE ers_users set is_active = false WHERE username = ?";
             pstmt = connection.prepareStatement(sql);
 
             pstmt.setString(1, username);
