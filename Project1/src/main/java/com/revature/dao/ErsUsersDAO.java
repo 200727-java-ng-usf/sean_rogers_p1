@@ -7,10 +7,18 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class creates, reads, and updates ers_users. Users are never deleted, they are marked inactive instead
+ */
 public class ErsUsersDAO {
 
     PreparedStatement pstmt;
 
+    /**
+     * gets all users from database. This was used during the initial stages of testing. It's not used in production.
+     * The list returned excludes inacvtive users
+     * @return list of ErsUser
+     */
     public List<ErsUser> getAll() {
 
         //DAOUtilities daoUtilities = new DAOUtilities();
@@ -24,12 +32,11 @@ public class ErsUsersDAO {
 
             ResultSet rs = pstmt.executeQuery();			// Queries the database
 
-            // So long as the ResultSet actually contains results...
+
             while (rs.next()) {
-                // We need to populate a Book object with info for each row from our query result
+
                 ErsUser user = new ErsUser();
 
-                // Each variable in our Book object maps to a column in a row from our results.
                 user.setId(rs.getInt("ers_user_id"));
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
@@ -50,10 +57,15 @@ public class ErsUsersDAO {
             pstmt = null;
         }
 
-        // return the list of Book objects populated by the DB.
+
         return users;
     }
 
+    /**
+     * Gets user from database with the specified username. Will not return inactive users
+     * @param username
+     * @return ErsUser
+     */
     public ErsUser getUserByUsername(String username) {
         ErsUser user = null;
 
@@ -94,6 +106,11 @@ public class ErsUsersDAO {
         return user;
     }
 
+    /**
+     * gets the user by the email specified. Will not return inactive users
+     * @param email
+     * @return ErsUser
+     */
     public ErsUser getUserByEmail(String email) {
         ErsUser user = null;
 
@@ -134,6 +151,12 @@ public class ErsUsersDAO {
         return user;
     }
 
+    /**
+     * Gets the user with the specified username/password combination. Will not return inactive users
+     * @param username
+     * @param password
+     * @return ErsUser
+     */
     public ErsUser getUserByUsernameAndPassword(String username, String password) {
         ErsUser user = null;
 
@@ -211,6 +234,11 @@ public class ErsUsersDAO {
         return false;
     }
 
+    /**
+     * updates the user in the databse with the user object parameter
+     * @param user
+     * @return true if successful, false if failed
+     */
     public boolean update(ErsUser user) {
         try(Connection connection = DAOUtilities.getConnection();) {
 
@@ -278,7 +306,11 @@ public class ErsUsersDAO {
         return false;
     }
 
-
+    /**
+     * DOES NOT DELETE THE USER. It merely marks the user with the specified username as inactive
+     * @param username
+     * @return true if successful, false if failed
+     */
     public boolean delete(String username) {
         try(Connection connection = DAOUtilities.getConnection();) {
 

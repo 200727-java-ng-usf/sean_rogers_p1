@@ -15,6 +15,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+/**
+ * Gets reimbursements from ErsReimbursementsDAO.
+ */
 @WebServlet("/viewallreimbursements")
 public class ViewAllReimbursementsServlet extends HttpServlet {
 
@@ -45,6 +48,10 @@ public class ViewAllReimbursementsServlet extends HttpServlet {
 
     }
 
+    /**
+     * sets the data access object. used for the need to mock ErsUsersDAO when unit testing
+     * @param dao
+     */
     public void setDAO(ErsReimbursementsDAO dao) {
         ersReimbursementsDAO = dao;
     }

@@ -1,5 +1,8 @@
 package com.revature.model;
 
+/**
+ * maps to ers_reimbursement_types
+ */
 public class ErsReimbursementType {
 
     private long reimbTypeId;

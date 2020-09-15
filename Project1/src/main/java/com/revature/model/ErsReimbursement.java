@@ -2,6 +2,9 @@ package com.revature.model;
 
 import java.sql.Timestamp;
 
+/**
+ * mapped to ers_reimbursements
+ */
 public class ErsReimbursement {
 
     private long reimbId;

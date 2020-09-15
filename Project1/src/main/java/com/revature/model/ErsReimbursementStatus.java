@@ -1,5 +1,8 @@
 package com.revature.model;
 
+/**
+ * maps to ers_reimbursement_statuses
+ */
 public class ErsReimbursementStatus {
 
     private long reimbStatusId;

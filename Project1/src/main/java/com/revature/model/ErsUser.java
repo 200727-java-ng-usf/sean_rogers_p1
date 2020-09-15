@@ -1,5 +1,8 @@
 package com.revature.model;
 
+/**
+ * maps to ers_users
+ */
 public class ErsUser {
 
     private long id;

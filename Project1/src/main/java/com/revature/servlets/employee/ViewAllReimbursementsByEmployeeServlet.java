@@ -13,6 +13,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Gets all reimbursements from DAO with the id of the current session user, then forwards to EmployeeViews/reimbursementsView.jsp
+ */
 @WebServlet("/viewallreimbursementsbyemployee")
 public class ViewAllReimbursementsByEmployeeServlet extends HttpServlet {
 
@@ -32,6 +35,10 @@ public class ViewAllReimbursementsByEmployeeServlet extends HttpServlet {
 
     }
 
+    /**
+     * sets the data access object. used for the need to mock ErsUsersDAO when unit testing
+     * @param dao
+     */
     public void setDAO(ErsReimbursementsDAO dao){
         ersReimbursementsDAO = dao;
     }

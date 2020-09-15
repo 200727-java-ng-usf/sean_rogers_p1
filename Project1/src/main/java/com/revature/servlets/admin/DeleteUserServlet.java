@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * DOES NOT DELETE USERS. IT MARKS THEM AS INACTIVE. Ensures the user has a role of ADMIN.
+ */
 @WebServlet("/deleteuserservlet")
 public class DeleteUserServlet extends HttpServlet {
 
@@ -40,6 +43,10 @@ public class DeleteUserServlet extends HttpServlet {
 
     }
 
+    /**
+     * sets the data access object. used for the need to mock ErsUsersDAO when unit testing
+     * @param dao
+     */
     public void setDAO(ErsUsersDAO dao){
         ersUsersDAO = dao;
     }

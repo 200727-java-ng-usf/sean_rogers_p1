@@ -10,6 +10,9 @@ public class DAOUtilities {
 
     private static Properties props = new Properties();
 
+    /**
+     * sets the props to point to the properties file
+     */
     static{
 
         try {
@@ -30,6 +33,11 @@ public class DAOUtilities {
         super();
     }
 
+    /**
+     * Sets the connection object to point to the postgres database.
+     * @return returns the connection object
+     * @throws SQLException
+     */
     public static synchronized Connection getConnection() throws SQLException {
         Connection connection = null;
 
@@ -45,6 +53,9 @@ public class DAOUtilities {
             e.printStackTrace();
         }
 
+        /**
+         * used for the automated deployment pipeline using AWS code pipeline
+         */
         if (connection == null) {
             try {
                 connection = DriverManager.getConnection(
@@ -56,15 +67,6 @@ public class DAOUtilities {
                 e.printStackTrace();
             }
         }
-
-        /*if (connection == null) {
-            try {
-                Class.forName("org.postgresql.Driver");
-            } catch (ClassNotFoundException e) {
-                System.out.println("Could not register driver!");
-                e.printStackTrace();
-            }
-        }*/
 
         //If connection was closed then retrieve a new connection
         if (connection.isClosed()){

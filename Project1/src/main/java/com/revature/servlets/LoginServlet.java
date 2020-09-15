@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * sends user to the login page
+ */
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
     @Override

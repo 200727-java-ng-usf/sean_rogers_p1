@@ -12,6 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * retrieves information sent from employeeDashboard.jsp creates a new reimbursement in the database and associates the
+ * author_id with the user.userId that sent it.
+ */
 @WebServlet("/submitnewreimbursement")
 public class SubmitNewReimbursementServlet extends HttpServlet {
 
@@ -38,6 +42,10 @@ public class SubmitNewReimbursementServlet extends HttpServlet {
         }
     }
 
+    /**
+     * sets the data access object. used for the need to mock ErsUsersDAO when unit testing
+     * @param dao
+     */
     public void setDAO(ErsReimbursementsDAO dao) {
         ersReimbursementsDAO = dao;
     }

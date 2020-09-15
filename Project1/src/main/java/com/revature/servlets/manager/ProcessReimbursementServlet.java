@@ -56,6 +56,10 @@ public class ProcessReimbursementServlet extends HttpServlet {
 
     }
 
+    /**
+     * sets the data access object. used for the need to mock ErsUsersDAO when unit testing
+     * @param dao
+     */
     public void setDAO(ErsReimbursementsDAO dao) {
         ersReimbursementsDAO = dao;
     }

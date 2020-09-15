@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * logs in the user if proper credentials are provided. Redirects user to the appropriate view depending on user ROLE
+ */
 @WebServlet("/LoginForwardingServlet")
 public class LoginForwardingServlet extends HttpServlet {
 
@@ -53,6 +56,10 @@ public class LoginForwardingServlet extends HttpServlet {
         }
     }
 
+    /**
+     * sets the data access object. used for the need to mock ErsUsersDAO when unit testing
+     * @param dao
+     */
     public void setDAO(ErsUsersDAO dao) {
         ersUsersDAO = dao;
     }

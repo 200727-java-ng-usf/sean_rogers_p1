@@ -9,10 +9,17 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+/**
+ * This class is for Creating, updating, and reading the ers_reimbursements table in postgres. Deleting is not used
+ */
 public class ErsReimbursementsDAO {
 
     PreparedStatement pstmt;
 
+    /**
+     * Get all reimbursements int the ers_reimbursements table
+     * @return all the reimbursements from DB as a pojo
+     */
     public List<ErsReimbursement> getAll() {
 
         //DAOUtilities daoUtilities = new DAOUtilities();
@@ -26,12 +33,12 @@ public class ErsReimbursementsDAO {
 
             ResultSet rs = pstmt.executeQuery();			// Queries the database
 
-            // So long as the ResultSet actually contains results...
+            // For each row returned, create a new ErsReimbursement pojo, set all of its properties,
+            // add it to reimbursements list
             while (rs.next()) {
-                // We need to populate a Book object with info for each row from our query result
+
                 ErsReimbursement reimbursement = new ErsReimbursement();
 
-                // Each variable in our Book object maps to a column in a row from our results.
                 reimbursement.setReimbId(rs.getInt("reimb_id"));
                 reimbursement.setAmount(rs.getDouble("amount"));
                 reimbursement.setSubmitted(rs.getTimestamp("submitted"));
@@ -59,8 +66,14 @@ public class ErsReimbursementsDAO {
         return reimbursements;
     }
 
+    /**
+     * Gets all reimbursements by type (Lodging, Food, Travel, Other)
+     * @param type
+     * @return all the reimbursements from DB as a pojo with specified type
+     */
     public List<ErsReimbursement> getAllByType(int type) {
 
+        // all reimbursements with specified type will be added to this list
         List<ErsReimbursement> reimbursements = new ArrayList<>();
 
         try (Connection connection = DAOUtilities.getConnection();){
@@ -71,12 +84,13 @@ public class ErsReimbursementsDAO {
 
             ResultSet rs = pstmt.executeQuery();			// Queries the database
 
-            // So long as the ResultSet actually contains results...
+            // For each row returned, create a new ErsReimbursement pojo, set all of its properties,
+            // add it to reimbursements list
             while (rs.next()) {
-                // We need to populate a Book object with info for each row from our query result
+
                 ErsReimbursement reimbursement = new ErsReimbursement();
 
-                // Each variable in our Book object maps to a column in a row from our results.
+
                 reimbursement.setReimbId(rs.getInt("reimb_id"));
                 reimbursement.setAmount(rs.getDouble("amount"));
                 reimbursement.setSubmitted(rs.getTimestamp("submitted"));
@@ -104,8 +118,14 @@ public class ErsReimbursementsDAO {
         return reimbursements;
     }
 
+    /**
+     * Gets all reimbursements by status (Pending, Approved, Denied)
+     * @param status
+     * @return all the reimbursements from DB as a pojo with specified status
+     */
     public List<ErsReimbursement> getAllByStatus(int status) {
 
+        // all reimbursements with specified status will be added to this list
         List<ErsReimbursement> reimbursements = new ArrayList<>();
 
         try (Connection connection = DAOUtilities.getConnection();){
@@ -114,14 +134,15 @@ public class ErsReimbursementsDAO {
 
             pstmt.setInt(1, status);
 
-            ResultSet rs = pstmt.executeQuery();			// Queries the database
+            ResultSet rs = pstmt.executeQuery();
 
-            // So long as the ResultSet actually contains results...
+            // For each row returned, create a new ErsReimbursement pojo, set all of its properties,
+            // add it to reimbursements list
             while (rs.next()) {
-                // We need to populate a Book object with info for each row from our query result
+
                 ErsReimbursement reimbursement = new ErsReimbursement();
 
-                // Each variable in our Book object maps to a column in a row from our results.
+
                 reimbursement.setReimbId(rs.getInt("reimb_id"));
                 reimbursement.setAmount(rs.getDouble("amount"));
                 reimbursement.setSubmitted(rs.getTimestamp("submitted"));
@@ -145,10 +166,18 @@ public class ErsReimbursementsDAO {
             pstmt = null;
         }
 
-        // return the list of Book objects populated by the DB.
+
         return reimbursements;
     }
 
+    /**
+     * Update the specified reimbursement
+     * @param reimbId
+     * @param receipt
+     * @param resolverId
+     * @param reimbStatusId
+     * @return true if update successful. false if there was a SQLException or something else went wrong
+     */
     public boolean update(long reimbId, double receipt, long resolverId, int reimbStatusId) {
         try(Connection connection = DAOUtilities.getConnection();) {
 
@@ -160,6 +189,7 @@ public class ErsReimbursementsDAO {
 
             ResultSet rs = pstmt.executeQuery();
 
+            // there should only be one row in rs
             while(rs.next()) {
                 ersReimbursement = new ErsReimbursement();
                 ersReimbursement.setReimbTypeId(rs.getInt("reimb_id"));
@@ -204,32 +234,13 @@ public class ErsReimbursementsDAO {
         return false;
     }
 
+    /**
+     * Updates the reimbursement with containing reimb_id == newErsReimbursement.reimbId
+     * @param newErsReimbursement
+     * @return true if successful, false if SQLException occured or something else happened
+     */
     public boolean update(ErsReimbursement newErsReimbursement) {
         try(Connection connection = DAOUtilities.getConnection();) {
-
-            //throw away next 20 lines?
-//            ErsReimbursement oldErsReimbursement = null;
-//
-//            String sql = "SELECT * FROM ers_reimbursements where reimb_id = ?";
-//            pstmt = connection.prepareStatement(sql);
-//
-//            pstmt.setLong(1, newErsReimbursement.getReimbId());
-//
-//            ResultSet rs = pstmt.executeQuery();
-//
-//            while(rs.next()) {
-//                oldErsReimbursement = new ErsReimbursement();
-//                oldErsReimbursement.setReimbTypeId(rs.getInt("reimb_id"));
-//                oldErsReimbursement.setAmount(rs.getDouble("amount"));
-//                oldErsReimbursement.setSubmitted(rs.getTimestamp("submitted"));
-//                oldErsReimbursement.setResolved(new Timestamp(Calendar.getInstance().getTime().getTime()));
-//                oldErsReimbursement.setDescription(rs.getString("description"));
-//                oldErsReimbursement.setReceipt(rs.getDouble("reciept"));
-//                oldErsReimbursement.setAuthorId(rs.getInt("author_id"));
-//                oldErsReimbursement.setResolverId(rs.getLong("resolver_id"));
-//                oldErsReimbursement.setReimbTypeId(rs.getInt("reimb_type_id"));
-//            }
-
 
             String sql = "UPDATE ers_reimbursements set amount = ?, " +
                     "description = ?, " +
@@ -259,8 +270,14 @@ public class ErsReimbursementsDAO {
         return false;
     }
 
+    /**
+     * Gets all reimbursements that were submitted by the specified id of a user
+     * @param id
+     * @return list of reimbursements
+     */
     public List<ErsReimbursement> getAllByAuthorId(long id) {
 
+        // reimbursements submitted by the user with the specified id will be added to this list
         List<ErsReimbursement> reimbursements = new ArrayList<>();
 
         try (Connection connection = DAOUtilities.getConnection();){
@@ -269,14 +286,14 @@ public class ErsReimbursementsDAO {
 
             pstmt.setLong(1, id);
 
-            ResultSet rs = pstmt.executeQuery();			// Queries the database
+            ResultSet rs = pstmt.executeQuery();
 
-            // So long as the ResultSet actually contains results...
+
             while (rs.next()) {
-                // We need to populate a Book object with info for each row from our query result
+
                 ErsReimbursement reimbursement = new ErsReimbursement();
 
-                // Each variable in our Book object maps to a column in a row from our results.
+
                 reimbursement.setReimbId(rs.getInt("reimb_id"));
                 reimbursement.setAmount(rs.getDouble("amount"));
                 reimbursement.setSubmitted(rs.getTimestamp("submitted"));
@@ -304,6 +321,11 @@ public class ErsReimbursementsDAO {
         return reimbursements;
     }
 
+    /**
+     * Creates a new reimbursement in DB
+     * @param ersReimbursement
+     * @return true if successful, false if failed
+     */
     public boolean save(ErsReimbursement ersReimbursement) {
 
         try(Connection connection = DAOUtilities.getConnection()) {

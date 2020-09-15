@@ -13,6 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * updates reimbursement specified by reimbursementsView.jsp.
+ * Users can only update reimbursements with status type of 1 (pending)
+ */
 @WebServlet("/updatereimbursement")
 public class UpdateReimbursementServlet extends HttpServlet {
 
@@ -39,6 +43,10 @@ public class UpdateReimbursementServlet extends HttpServlet {
 
     }
 
+    /**
+     * sets the data access object. used for the need to mock ErsUsersDAO when unit testing
+     * @param dao
+     */
     public void setDAO(ErsReimbursementsDAO dao) {
         ersReimbursementsDAO = dao;
     }
