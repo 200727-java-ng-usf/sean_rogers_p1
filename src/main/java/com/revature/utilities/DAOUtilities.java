@@ -71,6 +71,18 @@ public class DAOUtilities {
             }
         }
 
+        if (connection == null) {
+            try {
+                connection = DriverManager.getConnection(
+                        System.getProperty("url"),
+                        System.getProperty("username"),
+                        System.getProperty("password"));
+            } catch (SQLException e) {
+                System.out.println("Could not register driver!");
+                e.printStackTrace();
+            }
+        }
+
         //If connection was closed then retrieve a new connection
         if (connection.isClosed()){
             System.out.println("Opening new connection...");
