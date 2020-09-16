@@ -19,7 +19,10 @@ public class DAOUtilities {
 
             ClassLoader loader = Thread.currentThread().getContextClassLoader();
             InputStream propsInput = loader.getResourceAsStream("application.properties");
-            props.load(propsInput);
+            if(propsInput != null) {
+                props.load(propsInput);
+            }
+
 
         } catch (IOException e) {
 
