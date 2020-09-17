@@ -29,7 +29,7 @@ public class ErsReimbursementsDAO {
         try (Connection connection = DAOUtilities.getConnection();){
 
 
-            pstmt = connection.prepareStatement("SELECT * FROM ers_reimbursements");
+            pstmt = connection.prepareStatement("SELECT * FROM ers_reimbursements order by reimb_id");
 
             ResultSet rs = pstmt.executeQuery();			// Queries the database
 
@@ -78,7 +78,8 @@ public class ErsReimbursementsDAO {
 
         try (Connection connection = DAOUtilities.getConnection();){
 
-            pstmt = connection.prepareStatement("SELECT * FROM ers_reimbursements where reimb_type_id = ?");
+            pstmt = connection.prepareStatement("SELECT * FROM ers_reimbursements where reimb_type_id = ? " +
+                    "order by reimb_id");
 
             pstmt.setInt(1, type);
 
@@ -130,7 +131,8 @@ public class ErsReimbursementsDAO {
 
         try (Connection connection = DAOUtilities.getConnection();){
 
-            pstmt = connection.prepareStatement("SELECT * FROM ers_reimbursements where reimb_status_id = ?");
+            pstmt = connection.prepareStatement("SELECT * FROM ers_reimbursements where reimb_status_id = ? " +
+                    "order by reimb_id");
 
             pstmt.setInt(1, status);
 
@@ -282,7 +284,8 @@ public class ErsReimbursementsDAO {
 
         try (Connection connection = DAOUtilities.getConnection();){
 
-            pstmt = connection.prepareStatement("SELECT * FROM ers_reimbursements where author_id = ?");
+            pstmt = connection.prepareStatement("SELECT * FROM ers_reimbursements where author_id = ? " +
+                    "order by reimb_id");
 
             pstmt.setLong(1, id);
 
