@@ -83,6 +83,18 @@ public class DAOUtilities {
             }
         }
 
+        if (connection == null) {
+            try {
+                connection = DriverManager.getConnection(
+                        "jdbc:postgresql://java-ng-usf-200727.c00sdxc1dzhk.us-east-2.rds.amazonaws.com:5432/postgres?currentSchema=project1",
+                        "project1_user",
+                        "iowenvlkawnvwoief753917439");
+            } catch (SQLException e) {
+                System.out.println("Could not register driver!");
+                e.printStackTrace();
+            }
+        }
+
         //If connection was closed then retrieve a new connection
         if (connection.isClosed()){
             System.out.println("Opening new connection...");
